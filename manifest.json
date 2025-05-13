@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "select-gpt (headless)",
+  "version": "0.0.1",
+  "description": "Send the current selection to ChatGPT with Ctrl+I and copy the answer",
+  "background": {
+	"service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+	  "matches": [
+		"<all_urls>"
+	  ],
+	  "js": [
+		"content-scripts.js"
+	  ]
+	}
+  ],
+  "permissions": [
+	"scripting",
+	"activeTab",
+	"tabs",
+	"clipboardWrite"
+  ],
+  "host_permissions": [
+	"<all_urls>"
+  ],
+  "chrome_url_overrides": {
+	"pdf": "pdfjs/web/viewer.html"
+  },
+
+  "commands": {
+	"send-to-chatgpt": {
+	  "suggested_key": {
+		"default": "Ctrl+I"
+	  },
+	  "description": "Send highlighted text to ChatGPT"
+	}
+  }
+}
